@@ -13,36 +13,29 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Overview - Open Research
+# Overview
 
-<iframe width="560" height="315" src="https://youtube.com/embed/E1Sd_GEYLoQ" frameborder="0" allowfullscreen></iframe>
+In this workshop we shall take our first look at some key tools in the [Tidyverse](https://www.tidyverse.org) that will allow us to wrangle and tidy our data so that it's in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all 'play nicely' with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., possessing rows and columns). These rectangular structures are known in the Tidyverse as `tibbles` and replace the traditional `data.frame` structure. If you're interested, you can read more about `tibbles` in the R4DS book [here](https://r4ds.had.co.nz/tibbles.html).
 
-## Starting a new project
-
-It's important organise our R scripts, data files, and output we create. The easiest way to do that is to creat a new .Rproj file before we start writing our first script. In the video below, you can watch me do this.  
-
-<iframe width="560" height="315" src="https://youtube.com/embed/3lllr_lrcyo" frameborder="0" allowfullscreen></iframe>
-
-
-## Loading the Tidyverse
+# Loading the Tidyverse
 
 Let's take our first look at data wrangling. We are going to start with a dataset that comes with the tidyverse. The dataset is called `mpg` and comprises fuel economy data from 1999 to 2008 for 38 popular models of cars in the US.
 
-First, we to need to load the `tidyverse` library with the following:
+First, we need to load the `tidyverse` library with the following:
 
 ```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
 
-If you run this line without having installed the tidyverse on your computer, you will encounter an error. R packages only need to be installed once, but if you want to load one into your library you need to install it first with `install.packages(*packagename*)`.
+If you run this line without having first installed the tidyverse on your computer, you will encounter an error. R packages only need to be installed once, so if you want to load one into your library for the first time, you need to install it with `install.packages(*packagename*)`.
 
-For the `tidyverse` we need to first install it with:
+For the `tidyverse` we need to install it with:
 
 ```{r, eval=FALSE}
 install.packages(tidyverse)
 ```
 
-Once you have installed the `tidyverse`, you can then load it into your llbrary with the `library()` function. You only ever need to install a package once on your machine (unless it's updated and you want to install the most up-to-date version). When you are writing your R scripts, you never want to have the `install.packages()` function in the body of the script as if someone else were to run your script, this would update packages on their computer (which they might not want).
+Once you have installed the `tidyverse`, you can then load it into your llbrary with the `library()` function. You only ever need to install a package once on your machine (unless you have updated R or you want to install the most up-to-date version of a particular package). When you are writing your R scripts, you never want to have the `install.packages()` function in the body of the script as if someone else were to run your script, this would update packages on their computer (which they might not want).
 
 ## The `mpg` dataset
 
@@ -65,7 +58,7 @@ hwy - highway miles per gallon
 fl - fuel type
 class - "type" of car
 
-## The `head()` and `str()` functions
+# Using `head()` and `str()`
 
 We can explore the `mpg` dataset that is loaded with the tidyverse in a number of ways. If we want to look at the first 6 lines of the dataset, we can use the `head()` function.
 
@@ -73,7 +66,7 @@ We can explore the `mpg` dataset that is loaded with the tidyverse in a number o
 head(mpg)
 ```
 
-We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is in `tidy` format where each observation corresponds to a row. Most of the analyses we wil run in R involves `tidy` data.
+We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is `tidy` format where each observation corresponds to a row. Most of the analyses we will run in R involves `tidy` data. Within the tidyverse, the tibble is the standard way to represent data. You'll spend a lot of time tidying and wrangling your data to get it into this format! By doing this in R using code that you write, you are making this key stage *reproducible*. You can run the code again on an updated or different dataset - thus likely saving you lots of time!
 
 We can also ask for information about the structure of our data frame with `str()`. This will tell us about the columns, what type of variable they store, number of rows etc.
 
@@ -81,7 +74,7 @@ We can also ask for information about the structure of our data frame with `str(
 str(mpg)
 ```
 
-## Use `select()` to select columns
+# Use `select()` to select columns
 
 If we want to, we could just select one of the columns using the `select()` function. Below we are just selecing the column entitled `manufacturer`.
 
@@ -92,14 +85,14 @@ mpg %>%
 
 Related to the `select()` function is `rename()`. It does exactly what you think it might; it renames a column.
 
-We can also look at the different car manfacturers are in the dataset by using the `distinct()` function.
+We can also look at the different car manufacturers in the dataset by using the `distinct()` function. This gives us the unique manufacturer names. This function can be quite handy if you want to check a datasate for duplicates of (e.g.) participant IDs.
 
 ```{r}
 mpg %>%
   distinct(manufacturer)
 ```
 
-## Use `filter` to select rows
+# Use `filter()` to select rows
 
 Sometimes we might want to select only a subset of rows in our dataset. We can do that using the `filter()` function. For example, here we filter our dataset to include only cars made by 'honda'.
 
@@ -110,7 +103,7 @@ mpg %>%
 
 Note, we use the operator `==` which means 'is equal to'. This is a logical operator - other logical operators include less than `<`, greater than `>`, less than or equal to `<=`, greater then or equal to `>=`, and is not equal to `!=`.
 
-We can also filter using logical OR `|` or logical AND `&`. The first code chunk below filters the dataset for cases where the manufacturer is 'honda' OR 'toyota'.
+We can also filter using a combination of possibilities via logical OR `|` or logical AND `&`. The first code chunk below filters the dataset for cases where the manufacturer is 'honda' OR 'toyota'.
 
 ```{r}
 mpg %>%
@@ -124,7 +117,7 @@ mpg %>%
   filter(manufacturer == "honda" & year == "1999")
 ```
 
-### Combining `filter()` and `select()`
+## Combining functions
 
 We can combine the use of `filter()` with `select()` to filter for case where the manufacturer is 'honda', the year of manufacture is '1999' and we only want to display these two columns plus those telling us about fuel economy - `cty` and `hwy`.
 
@@ -134,7 +127,9 @@ mpg %>%
   select(manufacturer, year, cty, hwy)
 ```
 
-## The Pipe (`%>%`) Operator
+By combining just a few functions, you can imagine that we can build some quite complex data wrangling rules quite straightforwardly.  
+
+# The pipe `%>%`
 
 Note that in these examples above we are used the `%>%` operator - this is called the pipe and allows us to pass information from one side of the pipe to the other. You can read it out load as 'and then'. All of the functions in the tidyverse are known as verbs, and they describe that they do. The pipe is one of the most commonly used operators in the tidyverse and allows us to chain together different lines of code - with the output of each line being passed on as input into the next. In this example, the dataset `mpg` is being passed along to the `distinct()` function and we are asking for a list of the distinct (i.e., unique) manufacturers. This output itself is a vector. Vectors are a basic data structure and contain elements of the same type - for example, a bunch of numbers. We can add another line to our piped chain to tell us how many elements are in this vector. We coudl read this out loud as 'take the dataset mpg, and then work out the distinct manufacturer names, and then count them'. 
 
@@ -144,107 +139,38 @@ mpg %>%
   count()
 ```
 
-# Generating Summary Statistics
+# Tidying up a dataset
 
-If our dataset is in tidy format, often one of the first things we want to do is generate summary statistics. In the `mpg` dataset, how would be go about generating (e.g.) the means and standard deviations grouped by car manufacturer for one of our variables? Let's work out the average highway fuel economy (measured in the `hwy` column) for each car manufacturer. Let's also work out how many of each maufacturer there are using the `n()` function.
-
-## Using `summarise()` and `group_by()`
-
-We are going to use the `group_by()` function to group the dataset, and then the `summarise()` function to calculate the mean of hte `hwy` variable. The `summarise()` function can take a lot of different functions to give us summary statistics. To read more about the different options, type `?summarise` in the Console window. Commonly used ones are `mean()`, `median()`, `sd()`.
-
-```{r}
-mpg %>%
-  group_by(manufacturer) %>%
-  summarise(mean_hwy = mean(hwy), number = n())
-```
-Note that this output is currently ordered alphabetically by the first column `manufacturer`. What if we wanted to order this out by mean highway fuel economy highest (best) to lowest (worst)? We can use the arrange function.
-
-## Re-ording the Output with `arrange()`
-
-```{r}
-mpg %>%
-  group_by(manufacturer) %>%
-  summarise(mean_hwy = mean(hwy), number = n()) %>%
-  arrange(mean_hwy)
-```
-
-Hmm, so that isn't what we want - this is going from lowest to highest which is the default in R. We can change that by putting a `-` sign in from of the parameter we can to order by.
-
-```{r}
-mpg %>%
-  group_by(manufacturer) %>%
-  summarise(mean_hwy = mean(hwy), number = n()) %>%
-  arrange(- mean_hwy)
-```
-
-This is looking better.
-
-## Adding Columns Using `mutate()`
-
-We can add a new column that I'm calling `mean_hwy` using the `mutate()` fuction like this.
-
-```{r}
-mpg %>% 
-  group_by(manufacturer) %>%
-  mutate(mean_hwy = mean(hwy))
-```
-
-We have too many columns to display on this page so we can drop one by using the `select()` function slighlty differently. By putting a `-` sign in front of a column name in `select()` we end up dropping it.
-
-```{r}
-mpg %>% 
-  group_by(manufacturer) %>%
-  mutate(mean_hwy = mean(hwy)) %>%
-  select(- class)
-```
-
-Note that this doesn't change the mpg dataset permanently - the new column won't be saved unless we map the output of this code onto a new variable. Below I am doing this by using the assignemnt operator `<-` to map it onto a new variable I'm calling mpg_with_mean. Note that we remove the grouping at the end as we don't want our grouping rule to remain in our new data frame.
-
-```{r}
-mpg_with_mean <- mpg %>% 
-  group_by(manufacturer) %>%
-  mutate(mean_hwy = mean(hwy)) %>%
-  ungroup() %>%
-  select(- class) 
-```
-
-We can then inspect this new variable.
-
-```{r}
-head(mpg_with_mean)
-```
-
-## Tidying Up our dataset
+## Tidying variable names
 
 At the moment, the car manufacturer names are all in lower case. It would look a lot nice if they were in title case (i.e., capitalisation on the first letter of each word). We can use the `mutate()` function to create a new column - this time, the name of the new column is also the name of the old column that we're wanting to modify using the function `str_to_title()`. What this will do is overwrite the column `manufacturer` and replace it with the new version with the car manufacturer names in title case.
 
 ```{r}
-mpg_with_mean %>%
+mpg %>%
   mutate(manufacturer = str_to_title(manufacturer)) 
 ```
 
 The column `model` is also lowercase. Let's make that title case too.  We can use the `mutate()` function to work over more than one column at the same time like this:
 
 ```{r}
-mpg_with_mean %>%
+mpg %>%
   mutate(manufacturer = str_to_title(manufacturer), model = str_to_title(model))
 ```
 
 There are quite a few columns there, so how about we select just the manufacturer, model, year, transmission, and hwy columns:
 
 ```{r}
-mpg_with_mean %>%
+mpg %>%
   mutate(manufacturer = str_to_title(manufacturer), model = str_to_title(model)) %>%
   select(manufacturer, model, year, trans, hwy)
 ```
 
-
-# Reshaping your Data Frame
+## Recoding variables 
 
 In the real world, data frames do not always arrive on our computer in tidy format. Very often you need to engage in some data tidying before you can do anything useful with them. We're going to look at an example of how we go from messy data to tidy data.
 
 ```{r, message=FALSE}
-my_messy_data <- read_csv("https://raw.githubusercontent.com/ajstewartlang/MRes_Advanced_Data_Skills/master/Week_03/R_scripts/data_files/my_data.csv")
+my_messy_data <- read_csv("data/my_data.csv")
 ```
 
 We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our datafile.
@@ -271,7 +197,7 @@ my_messy_data %>%
   head()
 ```
 
-We now need to separate out our Condition column into two - one for our first factor (Prime), and one for our second factor (Target).
+We now need to separate out our Condition column into two - one for our first factor (Prime), and one for our second factor (Target). The `separate()` function does just this - when used in conjunction with a piped tibble, it needs to know which column we want to separate, what new columns to create by separating that original column, and on what basis we want to do the separation. In the example below we tell `separate()` that we want to separate the column labeled `condition` into two new columns called `Prime` and `Target` and we want to do this at any points where a `_` is present in the column to be separated.
 
 ```{r}
 my_messy_data %>% 
@@ -285,10 +211,9 @@ my_messy_data %>%
 
 We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R things they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function `clean_names()` from the janitor package to tidy up the columns names.
 
-```{r}
+```{r, message=FALSE}
 library(janitor)
 ```
-
 
 ```{r}
 my_messy_data %>% 
@@ -303,8 +228,6 @@ my_messy_data %>%
   clean_names(case = "upper_camel")  
 ```
 
-In this code chunk we have used the function `clean_names()` from the `janitor` package. If 
+# Summary
 
-# The Join Functions
-
-# Reading in Data
+Now you can do x, y, and z...
