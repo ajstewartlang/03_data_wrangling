@@ -13,7 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Overview 
+# Overview
 
 In this workshop we shall take our first look at some key tools in the [Tidyverse](https://www.tidyverse.org) that will allow us to wrangle and tidy our data so that it's in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all 'play nicely' with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., possessing rows and columns). These rectangular structures are known in the Tidyverse as `tibbles` and replace the traditional `data.frame` structure. If you're interested, you can read more about `tibbles` in the R4DS book [here](https://r4ds.had.co.nz/tibbles.html).
 
