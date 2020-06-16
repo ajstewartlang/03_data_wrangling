@@ -170,7 +170,7 @@ mpg %>%
 In the real world, data frames do not always arrive on our computer in tidy format. Very often you need to engage in some data tidying before you can do anything useful with them. We're going to look at an example of how we go from messy data to tidy data.
 
 ```{r, message=FALSE}
-my_messy_data <- read_csv("data/my_data.csv")
+my_messy_data <- read_csv("../data/my_data.csv")
 ```
 
 We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our datafile.
