@@ -1,2 +1,3 @@
-# 3_data_wrangling_pt1
- 
+# Workshop on Data Wrangling
+
+You can launch the workshop by clicking [here](https://ajstewartlang.github.io/03_data_wrangling/).
