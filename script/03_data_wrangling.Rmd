@@ -15,11 +15,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview 
 
-In this workshop we shall take our first look at some key tools in the [Tidyverse](https://www.tidyverse.org) that will allow us to wrangle and tidy our data so that it's in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all 'play nicely' with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., possessing rows and columns). These rectangular structures are known in the Tidyverse as `tibbles` and replace the traditional `data.frame` structure. If you're interested, you can read more about `tibbles` in the R4DS book [here](https://r4ds.had.co.nz/tibbles.html).
+In this workshop we shall take our first look at some key tools in the [Tidyverse](https://www.tidyverse.org) that will allow us to wrangle and tidy our data so that it's in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all 'play nicely' with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., with rows and columns). These rectangular structures are known in the Tidyverse as `tibbles`. If you're interested, you can read more about `tibbles` in the R4DS book [here](https://r4ds.had.co.nz/tibbles.html).
+
+Have a look at the following video where I walk you through this worksheet. Then I want you to work through the content by writing (and running) the script on your own machine.
+
+&nbsp;&nbsp;
+
+[Link to YouTube talk here]
+
+&nbsp;&nbsp;
 
 # Loading the Tidyverse
 
-Let's take our first look at data wrangling. We are going to start with a dataset that comes with the tidyverse. The dataset is called `mpg` and comprises fuel economy data from 1999 to 2008 for 38 popular models of cars in the US.
+Let's take our first look at data wrangling. We are going to start with a dataset that comes with the Tidyverse. The dataset is called `mpg` and comprises fuel economy data from 1999 to 2008 for 38 popular models of cars in the US.
 
 First, we need to load the `tidyverse` library with the following:
 
@@ -27,7 +35,7 @@ First, we need to load the `tidyverse` library with the following:
 library(tidyverse)
 ```
 
-If you run this line without having first installed the tidyverse on your computer, you will encounter an error. R packages only need to be installed once, so if you want to load one into your library for the first time, you need to install it with `install.packages(*packagename*)`.
+If you run this line without having first installed the Tidyverse on your computer, you will encounter an error. R packages only need to be installed once, so if you want to load one into your library for the first time, you need to install it with `install.packages(*packagename*)`.
 
 For the `tidyverse` we need to install it with:
 
@@ -39,7 +47,7 @@ Once you have installed the `tidyverse`, you can then load it into your llbrary 
 
 ## The `mpg` dataset
 
-The `mpg` dataset is loaded when the tidyverse is loaded. In the help file, which you can access by typing `help(mpg)` we see the following:
+The `mpg` dataset is loaded as part of the Tidyverse In the help file, which you can access by typing `help(mpg)` or `?mpg` we see the following:
 
 Description
 This dataset contains a subset of the fuel economy data that the EPA makes available on http://fueleconomy.gov. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car.
@@ -60,15 +68,15 @@ class - "type" of car
 
 # Using `head()` and `str()`
 
-We can explore the `mpg` dataset that is loaded with the tidyverse in a number of ways. If we want to look at the first 6 lines of the dataset, we can use the `head()` function.
+We can explore the `mpg` dataset that is loaded with the Tidyverse in a number of ways. If we want to look at the first 6 lines of the dataset, we can use the `head()` function.
 
 ```{r}
 head(mpg)
 ```
 
-We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is `tidy` format where each observation corresponds to a row. Most of the analyses we will run in R involves `tidy` data. Within the tidyverse, the tibble is the standard way to represent data. You'll spend a lot of time tidying and wrangling your data to get it into this format! By doing this in R using code that you write, you are making this key stage *reproducible*. You can run the code again on an updated or different dataset - thus likely saving you lots of time!
+We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is `tidy` format where each observation corresponds to a row. Most of the analyses we will run in R involve `tidy` data. Within the Tidyverse, the `tibble` is the standard way to represent data. You'll spend a lot of time tidying and wrangling your data to get it into this format! By doing this in R using a script that you write, you are making this key stage *reproducible*. You can run the script again on an updated or different dataset - thus likely saving you lots of time!
 
-We can also ask for information about the structure of our data frame with `str()`. This will tell us about the columns, what type of variable they store, number of rows etc.
+We can also ask for information about the structure of our dataset with `str()`. This will tell us about the columns, what type of variable each is, the number of rows etc.
 
 ```{r}
 str(mpg)
@@ -85,7 +93,7 @@ mpg %>%
 
 Related to the `select()` function is `rename()`. It does exactly what you think it might; it renames a column.
 
-We can also look at the different car manufacturers in the dataset by using the `distinct()` function. This gives us the unique manufacturer names. This function can be quite handy if you want to check a datasate for duplicates of (e.g.) participant IDs.
+We can also look at the different car manufacturers in the dataset by using the `distinct()` function. This gives us the unique manufacturer names. This function can be quite handy if you want to check a dataset for duplicates of (e.g.) participant IDs.
 
 ```{r}
 mpg %>%
@@ -131,7 +139,7 @@ By combining just a few functions, you can imagine that we can build some quite 
 
 # The pipe `%>%`
 
-Note that in these examples above we are used the `%>%` operator - this is called the pipe and allows us to pass information from one side of the pipe to the other. You can read it out load as 'and then'. All of the functions in the tidyverse are known as verbs, and they describe that they do. The pipe is one of the most commonly used operators in the tidyverse and allows us to chain together different lines of code - with the output of each line being passed on as input into the next. In this example, the dataset `mpg` is being passed along to the `distinct()` function and we are asking for a list of the distinct (i.e., unique) manufacturers. This output itself is a vector. Vectors are a basic data structure and contain elements of the same type - for example, a bunch of numbers. We can add another line to our piped chain to tell us how many elements are in this vector. We coudl read this out loud as 'take the dataset mpg, and then work out the distinct manufacturer names, and then count them'. 
+Note that in these examples above we used the `%>%` operator - this is called the pipe and allows us to pass information from one side of the pipe to the other. You can read it out load as 'and then'. All of the functions (such as `select()`, `filter()` etc.) in the Tidyverse are known as verbs, and they describe what they do. The pipe is one of the most commonly used operators in the Tidyverse and allows us to chain together different lines of code - with the output of each line being passed on as input into the next. In this example, the dataset `mpg` is passed along to the `distinct()` function where we ask for a list of the distinct (i.e., unique) manufacturers. This output itself is a vector. Vectors are a basic data structure and contain elements of the same type - for example, a bunch of numbers. We can add another line to our piped chain to tell us how many elements are in this vector. We could read this out loud as 'take the dataset mpg, and then work out the distinct manufacturer names, and then count them'. 
 
 ```{r}
 mpg %>% 
@@ -143,7 +151,7 @@ mpg %>%
 
 ## Tidying variable names
 
-At the moment, the car manufacturer names are all in lower case. It would look a lot nice if they were in title case (i.e., capitalisation on the first letter of each word). We can use the `mutate()` function to create a new column - this time, the name of the new column is also the name of the old column that we're wanting to modify using the function `str_to_title()`. What this will do is overwrite the column `manufacturer` and replace it with the new version with the car manufacturer names in title case.
+At the moment, the car manufacturer names are all in lower case. It would look a lot nicer if they were in title case (i.e., with capitalisation on the first letter of each word). We can use the `mutate()` function to create a new column - this time, the name of the new column is also the name of the old column that we're wanting to modify using the function `str_to_title()`. What this will do is overwrite the column `manufacturer` and replace it with the new version with the car manufacturer names in title case.
 
 ```{r}
 mpg %>%
@@ -170,16 +178,16 @@ mpg %>%
 In the real world, data frames do not always arrive on our computer in tidy format. Very often you need to engage in some data tidying before you can do anything useful with them. We're going to look at an example of how we go from messy data to tidy data.
 
 ```{r, message=FALSE}
-my_messy_data <- read_csv("../data/my_data.csv")
+my_messy_data <- read_csv("https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/my_data.csv")
 ```
 
-We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our datafile.
+We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our data file.
 
 ```{r}
 head(my_messy_data)
 ```
 
-It is actually a repeated measures design where we had one factor (Prime Type) with two levels (A vs. B) and a second factor (Target Type) with two levels (A vs. B). We want to recode our data frame so it better matches our experimental design. First we need to recode our 4 conditions like this:
+This is a repeated measures design where we had one factor (Prime Type) with two levels (A vs. B) and a second factor (Target Type) with two levels (A vs. B). We want to recode our data frame so it better matches our experimental design. First we need to recode our 4 conditions like this:
 
 Recode condition columns follows:
 Condition 1 = Prime A, Target A
@@ -209,7 +217,7 @@ my_messy_data %>%
   separate(col = "condition", into = c("Prime", "Target"), sep = "_")
 ```
 
-We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R things they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function `clean_names()` from the janitor package to tidy up the columns names.
+We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R thinks they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function `clean_names()` from the janitor package to tidy up the columns names.
 
 ```{r, message=FALSE}
 library(janitor)
@@ -228,6 +236,6 @@ my_messy_data %>%
   clean_names(case = "upper_camel")  
 ```
 
-# Summary
+# Your challenge
 
-Now you can do x, y, and z...
+Have a go at recreating what I've done above by writing your first script using RStudio Desktop. 

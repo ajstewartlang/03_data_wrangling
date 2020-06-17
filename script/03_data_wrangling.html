@@ -1528,20 +1528,24 @@ div.tocify {
 
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p>In this workshop we shall take our first look at some key tools in the <a href="https://www.tidyverse.org">Tidyverse</a> that will allow us to wrangle and tidy our data so that it’s in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all ‘play nicely’ with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., possessing rows and columns). These rectangular structures are known in the Tidyverse as <code>tibbles</code> and replace the traditional <code>data.frame</code> structure. If you’re interested, you can read more about <code>tibbles</code> in the R4DS book <a href="https://r4ds.had.co.nz/tibbles.html">here</a>.</p>
+<p>In this workshop we shall take our first look at some key tools in the <a href="https://www.tidyverse.org">Tidyverse</a> that will allow us to wrangle and tidy our data so that it’s in the format that we need in order to visualize and model it. The Tidyverse is a collection of packages that all ‘play nicely’ with each other. They are based on a common philosophy where data are represented in rectangular format (i.e., with rows and columns). These rectangular structures are known in the Tidyverse as <code>tibbles</code>. If you’re interested, you can read more about <code>tibbles</code> in the R4DS book <a href="https://r4ds.had.co.nz/tibbles.html">here</a>.</p>
+<p>Have a look at the following video where I walk you through this worksheet. Then I want you to work through the content by writing (and running) the script on your own machine.</p>
+<p>  </p>
+<p>[Link to YouTube talk here]</p>
+<p>  </p>
 </div>
 <div id="loading-the-tidyverse" class="section level1">
 <h1>Loading the Tidyverse</h1>
-<p>Let’s take our first look at data wrangling. We are going to start with a dataset that comes with the tidyverse. The dataset is called <code>mpg</code> and comprises fuel economy data from 1999 to 2008 for 38 popular models of cars in the US.</p>
+<p>Let’s take our first look at data wrangling. We are going to start with a dataset that comes with the Tidyverse. The dataset is called <code>mpg</code> and comprises fuel economy data from 1999 to 2008 for 38 popular models of cars in the US.</p>
 <p>First, we need to load the <code>tidyverse</code> library with the following:</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<p>If you run this line without having first installed the tidyverse on your computer, you will encounter an error. R packages only need to be installed once, so if you want to load one into your library for the first time, you need to install it with <code>install.packages(*packagename*)</code>.</p>
+<p>If you run this line without having first installed the Tidyverse on your computer, you will encounter an error. R packages only need to be installed once, so if you want to load one into your library for the first time, you need to install it with <code>install.packages(*packagename*)</code>.</p>
 <p>For the <code>tidyverse</code> we need to install it with:</p>
 <pre class="r"><code>install.packages(tidyverse)</code></pre>
 <p>Once you have installed the <code>tidyverse</code>, you can then load it into your llbrary with the <code>library()</code> function. You only ever need to install a package once on your machine (unless you have updated R or you want to install the most up-to-date version of a particular package). When you are writing your R scripts, you never want to have the <code>install.packages()</code> function in the body of the script as if someone else were to run your script, this would update packages on their computer (which they might not want).</p>
 <div id="the-mpg-dataset" class="section level2">
 <h2>The <code>mpg</code> dataset</h2>
-<p>The <code>mpg</code> dataset is loaded when the tidyverse is loaded. In the help file, which you can access by typing <code>help(mpg)</code> we see the following:</p>
+<p>The <code>mpg</code> dataset is loaded as part of the Tidyverse In the help file, which you can access by typing <code>help(mpg)</code> or <code>?mpg</code> we see the following:</p>
 <p>Description This dataset contains a subset of the fuel economy data that the EPA makes available on <a href="http://fueleconomy.gov" class="uri">http://fueleconomy.gov</a>. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car.</p>
 <p>A data frame with 234 rows and 11 variables.</p>
 <p>manufacturer - manufacturer model - model name displ - engine displacement, in litres year - year of manufacture cyl - number of cylinders trans -type of transmission drv -f = front-wheel drive, r = rear wheel drive, 4 = 4wd cty - city miles per gallon hwy - highway miles per gallon fl - fuel type class - “type” of car</p>
@@ -1549,7 +1553,7 @@ div.tocify {
 </div>
 <div id="using-head-and-str" class="section level1">
 <h1>Using <code>head()</code> and <code>str()</code></h1>
-<p>We can explore the <code>mpg</code> dataset that is loaded with the tidyverse in a number of ways. If we want to look at the first 6 lines of the dataset, we can use the <code>head()</code> function.</p>
+<p>We can explore the <code>mpg</code> dataset that is loaded with the Tidyverse in a number of ways. If we want to look at the first 6 lines of the dataset, we can use the <code>head()</code> function.</p>
 <pre class="r"><code>head(mpg)</code></pre>
 <pre><code>## # A tibble: 6 x 11
 ##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
@@ -1560,8 +1564,8 @@ div.tocify {
 ## 4 audi         a4      2    2008     4 auto(… f        21    30 p     comp…
 ## 5 audi         a4      2.8  1999     6 auto(… f        16    26 p     comp…
 ## 6 audi         a4      2.8  1999     6 manua… f        18    26 p     comp…</code></pre>
-<p>We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is <code>tidy</code> format where each observation corresponds to a row. Most of the analyses we will run in R involves <code>tidy</code> data. Within the tidyverse, the tibble is the standard way to represent data. You’ll spend a lot of time tidying and wrangling your data to get it into this format! By doing this in R using code that you write, you are making this key stage <em>reproducible</em>. You can run the code again on an updated or different dataset - thus likely saving you lots of time!</p>
-<p>We can also ask for information about the structure of our data frame with <code>str()</code>. This will tell us about the columns, what type of variable they store, number of rows etc.</p>
+<p>We see that it is a tibble - or a rectangular data frame - made up of rows and columns. This is <code>tidy</code> format where each observation corresponds to a row. Most of the analyses we will run in R involve <code>tidy</code> data. Within the Tidyverse, the <code>tibble</code> is the standard way to represent data. You’ll spend a lot of time tidying and wrangling your data to get it into this format! By doing this in R using a script that you write, you are making this key stage <em>reproducible</em>. You can run the script again on an updated or different dataset - thus likely saving you lots of time!</p>
+<p>We can also ask for information about the structure of our dataset with <code>str()</code>. This will tell us about the columns, what type of variable each is, the number of rows etc.</p>
 <pre class="r"><code>str(mpg)</code></pre>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    234 obs. of  11 variables:
 ##  $ manufacturer: chr  &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; ...
@@ -1596,7 +1600,7 @@ div.tocify {
 ## 10 audi        
 ## # … with 224 more rows</code></pre>
 <p>Related to the <code>select()</code> function is <code>rename()</code>. It does exactly what you think it might; it renames a column.</p>
-<p>We can also look at the different car manufacturers in the dataset by using the <code>distinct()</code> function. This gives us the unique manufacturer names. This function can be quite handy if you want to check a datasate for duplicates of (e.g.) participant IDs.</p>
+<p>We can also look at the different car manufacturers in the dataset by using the <code>distinct()</code> function. This gives us the unique manufacturer names. This function can be quite handy if you want to check a dataset for duplicates of (e.g.) participant IDs.</p>
 <pre class="r"><code>mpg %&gt;%
   distinct(manufacturer)</code></pre>
 <pre><code>## # A tibble: 15 x 1
@@ -1683,7 +1687,7 @@ div.tocify {
 </div>
 <div id="the-pipe" class="section level1">
 <h1>The pipe <code>%&gt;%</code></h1>
-<p>Note that in these examples above we are used the <code>%&gt;%</code> operator - this is called the pipe and allows us to pass information from one side of the pipe to the other. You can read it out load as ‘and then’. All of the functions in the tidyverse are known as verbs, and they describe that they do. The pipe is one of the most commonly used operators in the tidyverse and allows us to chain together different lines of code - with the output of each line being passed on as input into the next. In this example, the dataset <code>mpg</code> is being passed along to the <code>distinct()</code> function and we are asking for a list of the distinct (i.e., unique) manufacturers. This output itself is a vector. Vectors are a basic data structure and contain elements of the same type - for example, a bunch of numbers. We can add another line to our piped chain to tell us how many elements are in this vector. We coudl read this out loud as ‘take the dataset mpg, and then work out the distinct manufacturer names, and then count them’.</p>
+<p>Note that in these examples above we used the <code>%&gt;%</code> operator - this is called the pipe and allows us to pass information from one side of the pipe to the other. You can read it out load as ‘and then’. All of the functions (such as <code>select()</code>, <code>filter()</code> etc.) in the Tidyverse are known as verbs, and they describe what they do. The pipe is one of the most commonly used operators in the Tidyverse and allows us to chain together different lines of code - with the output of each line being passed on as input into the next. In this example, the dataset <code>mpg</code> is passed along to the <code>distinct()</code> function where we ask for a list of the distinct (i.e., unique) manufacturers. This output itself is a vector. Vectors are a basic data structure and contain elements of the same type - for example, a bunch of numbers. We can add another line to our piped chain to tell us how many elements are in this vector. We could read this out loud as ‘take the dataset mpg, and then work out the distinct manufacturer names, and then count them’.</p>
 <pre class="r"><code>mpg %&gt;% 
   distinct(manufacturer) %&gt;%
   count()</code></pre>
@@ -1696,7 +1700,7 @@ div.tocify {
 <h1>Tidying up a dataset</h1>
 <div id="tidying-variable-names" class="section level2">
 <h2>Tidying variable names</h2>
-<p>At the moment, the car manufacturer names are all in lower case. It would look a lot nice if they were in title case (i.e., capitalisation on the first letter of each word). We can use the <code>mutate()</code> function to create a new column - this time, the name of the new column is also the name of the old column that we’re wanting to modify using the function <code>str_to_title()</code>. What this will do is overwrite the column <code>manufacturer</code> and replace it with the new version with the car manufacturer names in title case.</p>
+<p>At the moment, the car manufacturer names are all in lower case. It would look a lot nicer if they were in title case (i.e., with capitalisation on the first letter of each word). We can use the <code>mutate()</code> function to create a new column - this time, the name of the new column is also the name of the old column that we’re wanting to modify using the function <code>str_to_title()</code>. What this will do is overwrite the column <code>manufacturer</code> and replace it with the new version with the car manufacturer names in title case.</p>
 <pre class="r"><code>mpg %&gt;%
   mutate(manufacturer = str_to_title(manufacturer)) </code></pre>
 <pre><code>## # A tibble: 234 x 11
@@ -1752,8 +1756,8 @@ div.tocify {
 <div id="recoding-variables" class="section level2">
 <h2>Recoding variables</h2>
 <p>In the real world, data frames do not always arrive on our computer in tidy format. Very often you need to engage in some data tidying before you can do anything useful with them. We’re going to look at an example of how we go from messy data to tidy data.</p>
-<pre class="r"><code>my_messy_data &lt;- read_csv(&quot;../data/my_data.csv&quot;)</code></pre>
-<p>We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our datafile.</p>
+<pre class="r"><code>my_messy_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/my_data.csv&quot;)</code></pre>
+<p>We ran a reaction time experiment with 24 participants and 4 conditions - they are numbered 1-4 in our data file.</p>
 <pre class="r"><code>head(my_messy_data)</code></pre>
 <pre><code>## # A tibble: 6 x 3
 ##   participant condition    rt
@@ -1764,7 +1768,7 @@ div.tocify {
 ## 4           1         4   765
 ## 5           2         1  1042
 ## 6           2         2  1050</code></pre>
-<p>It is actually a repeated measures design where we had one factor (Prime Type) with two levels (A vs. B) and a second factor (Target Type) with two levels (A vs. B). We want to recode our data frame so it better matches our experimental design. First we need to recode our 4 conditions like this:</p>
+<p>This is a repeated measures design where we had one factor (Prime Type) with two levels (A vs. B) and a second factor (Target Type) with two levels (A vs. B). We want to recode our data frame so it better matches our experimental design. First we need to recode our 4 conditions like this:</p>
 <p>Recode condition columns follows: Condition 1 = Prime A, Target A Condition 2 = Prime A, Target B Condition 3 = Prime B, Target A Condition 4 = Prime B, Target B</p>
 <pre class="r"><code>my_messy_data %&gt;% 
   mutate(condition = recode(condition,
@@ -1804,7 +1808,7 @@ div.tocify {
 ##  9           3 PrimeA TargetA   943
 ## 10           3 PrimeA TargetB   910
 ## # … with 86 more rows</code></pre>
-<p>We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R things they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function <code>clean_names()</code> from the janitor package to tidy up the columns names.</p>
+<p>We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R thinks they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function <code>clean_names()</code> from the janitor package to tidy up the columns names.</p>
 <pre class="r"><code>library(janitor)</code></pre>
 <pre class="r"><code>my_messy_data %&gt;% 
   mutate(condition = recode(condition,
@@ -1832,9 +1836,9 @@ div.tocify {
 ## # … with 86 more rows</code></pre>
 </div>
 </div>
-<div id="summary" class="section level1">
-<h1>Summary</h1>
-<p>Now you can do x, y, and z…</p>
+<div id="your-challenge" class="section level1">
+<h1>Your challenge</h1>
+<p>Have a go at recreating what I’ve done above by writing your first script using RStudio Desktop.</p>
 </div>
 
 
