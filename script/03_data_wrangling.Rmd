@@ -21,8 +21,11 @@ Have a look at the following video where I walk you through this worksheet. Then
 
 &nbsp;&nbsp;
 
-[Link to YouTube talk here]
+<center>
 
+<iframe width="560" height="315" src="https://youtube.com/embed/skzdmfRAjbQ" frameborder="0" allowfullscreen></iframe>
+
+</center>
 &nbsp;&nbsp;
 
 # Loading the Tidyverse
