@@ -242,3 +242,7 @@ my_messy_data %>%
 # Your challenge
 
 Have a go at recreating what I've done above by writing your first script using RStudio Desktop. 
+
+## Improve this Workshop
+
+If you spot any issues/errors in this workshop, you can raise an issue or create a pull request for [this repo](https://github.com/ajstewartlang/03_data_wrangling). 
