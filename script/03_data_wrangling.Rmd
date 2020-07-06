@@ -220,12 +220,6 @@ my_messy_data %>%
   separate(col = "condition", into = c("Prime", "Target"), sep = "_")
 ```
 
-We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R thinks they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function `clean_names()` from the janitor package to tidy up the columns names.
-
-```{r, message=FALSE}
-library(janitor)
-```
-
 ```{r}
 my_messy_data %>% 
   mutate(condition = recode(condition,
@@ -233,10 +227,8 @@ my_messy_data %>%
                             "2" = "PrimeA_TargetB", 
                             "3" = "PrimeB_TargetA", 
                             "4" = "PrimeB_TargetB")) %>%
-  rename(ReactionTime = rt) %>%
   separate(col = "condition", into = c("Prime", "Target"), sep = "_") %>%
-  mutate(Prime = factor(Prime), Target = factor(Target)) %>%
-  clean_names(case = "upper_camel")  
+  mutate(Prime = factor(Prime), Target = factor(Target))
 ```
 
 # Your challenge

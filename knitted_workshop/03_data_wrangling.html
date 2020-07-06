@@ -1830,31 +1830,27 @@ div.tocify {
 ##  9           3 PrimeA TargetA   943
 ## 10           3 PrimeA TargetB   910
 ## # … with 86 more rows</code></pre>
-<p>We could make things a little neater by using appropriate title case capitalisation for our column names, and ensuring our Prime and Target factors are coded as factors - at the moment, R thinks they are just strings of characters. Factors in R work much like factors in experimental designs - a factor can have several levels, and each observation coded with the same level name is considered part of that conceptual grouping. We can use the function <code>clean_names()</code> from the janitor package to tidy up the columns names.</p>
-<pre class="r"><code>library(janitor)</code></pre>
 <pre class="r"><code>my_messy_data %&gt;% 
   mutate(condition = recode(condition,
                             &quot;1&quot; = &quot;PrimeA_TargetA&quot;,
                             &quot;2&quot; = &quot;PrimeA_TargetB&quot;, 
                             &quot;3&quot; = &quot;PrimeB_TargetA&quot;, 
                             &quot;4&quot; = &quot;PrimeB_TargetB&quot;)) %&gt;%
-  rename(ReactionTime = rt) %&gt;%
   separate(col = &quot;condition&quot;, into = c(&quot;Prime&quot;, &quot;Target&quot;), sep = &quot;_&quot;) %&gt;%
-  mutate(Prime = factor(Prime), Target = factor(Target)) %&gt;%
-  clean_names(case = &quot;upper_camel&quot;)  </code></pre>
+  mutate(Prime = factor(Prime), Target = factor(Target))</code></pre>
 <pre><code>## # A tibble: 96 x 4
-##    Participant Prime  Target  ReactionTime
-##          &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;          &lt;dbl&gt;
-##  1           1 PrimeA TargetA          879
-##  2           1 PrimeA TargetB         1027
-##  3           1 PrimeB TargetA         1108
-##  4           1 PrimeB TargetB          765
-##  5           2 PrimeA TargetA         1042
-##  6           2 PrimeA TargetB         1050
-##  7           2 PrimeB TargetA          942
-##  8           2 PrimeB TargetB          945
-##  9           3 PrimeA TargetA          943
-## 10           3 PrimeA TargetB          910
+##    participant Prime  Target     rt
+##          &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt;
+##  1           1 PrimeA TargetA   879
+##  2           1 PrimeA TargetB  1027
+##  3           1 PrimeB TargetA  1108
+##  4           1 PrimeB TargetB   765
+##  5           2 PrimeA TargetA  1042
+##  6           2 PrimeA TargetB  1050
+##  7           2 PrimeB TargetA   942
+##  8           2 PrimeB TargetB   945
+##  9           3 PrimeA TargetA   943
+## 10           3 PrimeA TargetB   910
 ## # … with 86 more rows</code></pre>
 </div>
 </div>
