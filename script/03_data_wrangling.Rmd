@@ -233,7 +233,52 @@ my_messy_data %>%
 
 ## The pivot functions
 
-Most of the analysis we will conduct in R requires our data to be in tidy, or long, format. In such data sets, one row corresponds to one observation. In the real world, data are rarely in the right format for analysis. In R, the `pivot_wider()` and `pivot_longer()` functions are designed to reshape our data files. First, let's load a datafile that is in wide format (i.e., multiple observations per row). It is from an experiment where we had four conditions (labelled Condition1, Condition2, Condition3, and Condition4). In addition to there being a column for each of the 4 conditions, we also have a column corresponding to participant ID. Each cell in the data set corresponds to a reaction time.
+Most of the analysis we will conduct in R requires our data to be in tidy, or long, format. In such data sets, one row corresponds to one observation. In the real world, data are rarely in the right format for analysis. In R, the `pivot_wider()` and `pivot_longer()` functions are designed to reshape our data files. First, let's load a datafile that is in wide format (i.e., multiple observations per row). It is from an experiment where we had four conditions (labelled Condition1, Condition2, Condition3, and Condition4). In addition to there being a column for each of the 4 conditions, we also have a column corresponding to participant ID. Each cell in the data set corresponds to a reaction time (measured in milliseconds).
+
+```{r, message=FALSE}
+my_wide_data <- read_csv("https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/my_wide_data.csv")
+```
+
+### `Pivot_longer()`
+
+```{r}
+head(my_wide_data)
+```
+
+So, we can see the data file is in wide format. We want to reshape it to long format. We can do that using the `pivot_longer()` function.
+
+Minially, we need to specify the data frame that we want to reshape, the columns that we want to 'pivot' into longer format, the name of the new column that we are creating, and the name of the column that will hold the values of our reshaped data frame. We are going to map the output to a variable I'm calling `my_longer_data`.
+
+```{r}
+my_longer_data <- my_wide_data %>%
+  pivot_longer(cols = c(Condition1, Condition2, Condition3, Condition4), 
+               names_to = "Condition", 
+               values_to = "RT")
+```
+
+Now let's have a look at what our reshaped data frame looks like.
+
+```{r}
+head(my_longer_data)
+```
+
+So you can see our data are now in long - or tidy - format with one observation per row.
+
+### `Pivot_wider()`
+
+We can use the `pivot_wider()` function to reshape a long data frame so that it goes from long to wide format. It works similarly to `pivot_longer()`. Let's take our new, long, data frame and turn it back into wide format. With `pivot_wider()` we minimally need to specify the data frame that we want to reshape, and a pair or arguments (names_from and values_from) that describe from which column to get the name of the output column, and from which column to get the cell values.  
+
+```{r}
+my_wider_data <- my_longer_data %>%
+  pivot_wider(names_from = "Condition", 
+              values_from = "RT")
+```
+
+We can check that our data is back in wide format.
+
+```{r}
+head(my_wider_data)
+```
 
 # Your challenge
 
