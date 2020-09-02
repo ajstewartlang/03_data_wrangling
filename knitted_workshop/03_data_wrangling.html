@@ -1844,8 +1844,8 @@ div.tocify {
 <h2>The pivot functions</h2>
 <p>Most of the analysis we will conduct in R requires our data to be in tidy, or long, format. In such data sets, one row corresponds to one observation. In the real world, data are rarely in the right format for analysis. In R, the <code>pivot_wider()</code> and <code>pivot_longer()</code> functions are designed to reshape our data files. First, let’s load a datafile that is in wide format (i.e., multiple observations per row). It is from an experiment where we had four conditions (labelled Condition1, Condition2, Condition3, and Condition4). In addition to there being a column for each of the 4 conditions, we also have a column corresponding to participant ID. Each cell in the data set corresponds to a reaction time (measured in milliseconds).</p>
 <pre class="r"><code>my_wide_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/my_wide_data.csv&quot;)</code></pre>
-<div id="pivot_longer" class="section level3">
-<h3><code>Pivot_longer()</code></h3>
+<div id="the-pivot_longer-function" class="section level3">
+<h3>The <code>pivot_longer()</code> function</h3>
 <pre class="r"><code>head(my_wide_data)</code></pre>
 <pre><code>## # A tibble: 6 x 5
 ##      ID Condition1 Condition2 Condition3 Condition4
@@ -1887,8 +1887,8 @@ div.tocify {
 ## 5     2 Condition1   502
 ## 6     2 Condition2   494</code></pre>
 </div>
-<div id="pivot_wider" class="section level3">
-<h3><code>Pivot_wider()</code></h3>
+<div id="the-pivot_wider-function" class="section level3">
+<h3>The <code>Pivot_wider()</code> function</h3>
 <p>We can use the <code>pivot_wider()</code> function to reshape a long data frame so that it goes from long to wide format. It works similarly to <code>pivot_longer()</code>. Let’s take our new, long, data frame and turn it back into wide format. With <code>pivot_wider()</code> we minimally need to specify the data frame that we want to reshape, and a pair or arguments (names_from and values_from) that describe from which column to get the name of the output column, and from which column to get the cell values.</p>
 <pre class="r"><code>my_wider_data &lt;- my_longer_data %&gt;%
   pivot_wider(names_from = &quot;Condition&quot;, 

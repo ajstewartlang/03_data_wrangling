@@ -239,7 +239,7 @@ Most of the analysis we will conduct in R requires our data to be in tidy, or lo
 my_wide_data <- read_csv("https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/my_wide_data.csv")
 ```
 
-### `Pivot_longer()`
+### The `pivot_longer()` function
 
 ```{r}
 head(my_wide_data)
@@ -271,7 +271,7 @@ my_longer_data %>%
 ```
 
 
-### `Pivot_wider()`
+### The `Pivot_wider()` function
 
 We can use the `pivot_wider()` function to reshape a long data frame so that it goes from long to wide format. It works similarly to `pivot_longer()`. Let's take our new, long, data frame and turn it back into wide format. With `pivot_wider()` we minimally need to specify the data frame that we want to reshape, and a pair or arguments (names_from and values_from) that describe from which column to get the name of the output column, and from which column to get the cell values.  
 
