@@ -274,7 +274,7 @@ my_wider_data <- my_longer_data %>%
               values_from = "RT")
 ```
 
-We can check that our data is back in wide format.
+We can check that our data set is back in wide format.
 
 ```{r}
 head(my_wider_data)
