@@ -262,7 +262,14 @@ Now let's have a look at what our reshaped data frame looks like.
 head(my_longer_data)
 ```
 
-So you can see our data are now in long - or tidy - format with one observation per row.
+So you can see our data are now in long - or tidy - format with one observation per row. Note that our `Condition` column isn't coded as a factor. It's important that our data set reflects the structure of our experiment so let's convert that column to a factor - note that in the following code we are now 'saving' the change as we are not mapping the output onto a variable name.
+
+```{r}
+my_longer_data %>%
+  mutate(Condition = factor(Condition)) %>%
+  head()
+```
+
 
 ### `Pivot_wider()`
 

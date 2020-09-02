@@ -1873,7 +1873,19 @@ div.tocify {
 ## 4     1 Condition4   488
 ## 5     2 Condition1   502
 ## 6     2 Condition2   494</code></pre>
-<p>So you can see our data are now in long - or tidy - format with one observation per row.</p>
+<p>So you can see our data are now in long - or tidy - format with one observation per row. Note that our <code>Condition</code> column isn’t coded as a factor. It’s important that our data set reflects the structure of our experiment so let’s convert that column to a factor - note that in the following code we are now ‘saving’ the change as we are not mapping the output onto a variable name.</p>
+<pre class="r"><code>my_longer_data %&gt;%
+  mutate(Condition = factor(Condition)) %&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##      ID Condition     RT
+##   &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;
+## 1     1 Condition1   487
+## 2     1 Condition2   492
+## 3     1 Condition3   499
+## 4     1 Condition4   488
+## 5     2 Condition1   502
+## 6     2 Condition2   494</code></pre>
 </div>
 <div id="pivot_wider" class="section level3">
 <h3><code>Pivot_wider()</code></h3>
