@@ -231,6 +231,10 @@ my_messy_data %>%
   mutate(Prime = factor(Prime), Target = factor(Target))
 ```
 
+## The pivot functions
+
+Most of the analysis we will conduct in R requires our data to be in tidy, or long, format. In such data sets, one row corresponds to one observation. In the real world, data are rarely in the right format for analysis. In R, the `pivot_wider()` and `pivot_longer()` functions are designed to reshape our data files. First, let's load a datafile that is in wide format (i.e., multiple observations per row). It is from an experiment where we had four conditions (labelled Condition1, Condition2, Condition3, and Condition4). In addition to there being a column for each of the 4 conditions, we also have a column corresponding to participant ID. Each cell in the data set corresponds to a reaction time.
+
 # Your challenge
 
 Have a go at recreating what I've done above by writing your first script using RStudio Desktop. 
