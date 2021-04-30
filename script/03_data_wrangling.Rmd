@@ -306,6 +306,8 @@ We want to combine this dataset with our reading time dataset from above `my_lon
 head(my_longer_data)
 ```
 
+## Full Join
+
 We can combine using one of the join functions. There are a variety of options including `full_join()` which includes all of the rows in tibble one or tibble two that we want to join. Other options include `inner_join()` which includes all of the rows in tibble one *and* tibble 2, as well as `left_join()` and `right_join()`.
 
 ```{r}
@@ -317,6 +319,8 @@ We now see that our dataset are combined as we'd expect.
 ```{r}
 combined_data
 ```
+
+## Left Join
 
 Of course, you may be thinking that we could just do a quick bit of Excel cut and paste of the columns we want from one dataset to the other. But what about the case where our individual differences file contains 10,000 participant IDs (in random order) and we're only interested in combining the two datasets where there is a match?
 
