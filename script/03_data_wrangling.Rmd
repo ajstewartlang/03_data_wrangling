@@ -286,6 +286,55 @@ We can check that our data set is back in wide format.
 head(my_wider_data)
 ```
 
+# Joining Two Datasets
+
+Sometimes you might need to combine two datasets. For example, you might have one dataset that contains reading time data (like the one above) and another than contains individual difference measures for the participants in the first dataset. How would we go about combining these two datasets so that we end up with one that includes both the reading time data *and* the individual difference measures (that perhaps we want to covary out later)? Luckily, the `{dplyr}` package contains a number of join functions that allows you to join together different tibbles. First, let's load the data that contains the individual different measures.
+
+```{r, message=FALSE}
+individual_diffs <- read_csv("https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/individual_diffs.csv")
+```
+
+Let's look at the first few rows of the individual differences data. This dataset contains the ID numbers of our participants plus measures of IQ (the iq column) and Working Memory (the wm column).
+
+```{r}
+head(individual_diffs)
+```
+
+We want to combine this dataset with our reading time dataset from above `my_longer_data` which looks like this:
+
+```{r}
+head(my_longer_data)
+```
+
+We can combine using one of the join functions. There are a variety of options including `full_join()` which includes all of the rows in tibble one or tibble two that we want to join. Other options include `inner_join()` which includes all of the rows in tibble one *and* tibble 2, as well as `left_join()` and `right_join()`.
+
+```{r}
+combined_data <- full_join(my_longer_data, individual_diffs, by = "ID")
+```
+
+We now see that our dataset are combined as we'd expect.
+
+```{r}
+combined_data
+```
+
+Of course, you may be thinking that we could just do a quick bit of Excel cut and paste of the columns we want from one dataset to the other. But what about the case where our individual differences file contains 10,000 participant IDs (in random order) and we're only interested in combining the two datasets where there is a match?
+
+```{r, message=FALSE}
+large_ind_diffs <- read_csv("https://raw.githubusercontent.com/ajstewartlang/03_data_wrangling/master/data/large_ind_diffs.csv")
+```
+
+```{r}
+head(large_ind_diffs)
+```
+
+We can actually use another join function (`left_join()`) to combine these two datasets, but only where there is a match of ID with the first of the two datasets (`my_longer_data`) in the function call.
+
+```{r}
+left_join(my_longer_data, large_ind_diffs, by = "ID")
+```
+
+
 # Your challenge
 
 Have a go at recreating what I've done above by writing your first script using RStudio Desktop. 
